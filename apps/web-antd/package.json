@@ -50,7 +50,7 @@
     "ant-design-vue": "catalog:",
     "dayjs": "catalog:",
     "pinia": "catalog:",
-    "vue-agent-start": "file:../../../vue-agent-start",
+    "vue-agent-start": "link:../../../vue-agent-start",
     "vue": "catalog:",
     "vue-draggable-next": "^2.3.0",
     "vue-router": "catalog:"

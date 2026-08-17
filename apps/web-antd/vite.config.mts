@@ -8,12 +8,68 @@ import { defineConfig } from '@vben/vite-config';
 const vueAgentStartFlowSource = fileURLToPath(
   new URL('../../../vue-agent-start/src/agent-flow/', import.meta.url),
 );
+const vueAgentStartSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/index.ts', import.meta.url),
+);
+const vueAgentStartClientSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/client/index.ts', import.meta.url),
+);
+const vueAgentStartProviderSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/provider-hub/index.ts', import.meta.url),
+);
+const vueAgentStartKnowledgeSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/knowledge-hub/index.ts', import.meta.url),
+);
+const vueAgentStartStudioSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/agent-studio/index.ts', import.meta.url),
+);
+const vueAgentStartAgentFlowSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/agent-flow/index.ts', import.meta.url),
+);
+const vueAgentStartStyleSource = fileURLToPath(
+  new URL(
+    '../../../vue-agent-start/src/knowledge-hub/styles/index.css',
+    import.meta.url,
+  ),
+);
 
 export default defineConfig(async () => ({
   application: {},
   vite: {
     resolve: {
       alias: [
+        // Development uses the component-library source directly. This gives
+        // linked Vue SFCs normal Vite HMR instead of requiring a dist rebuild.
+        {
+          find: /^vue-agent-start$/,
+          replacement: vueAgentStartSource,
+        },
+        {
+          find: /^vue-agent-start\/client$/,
+          replacement: vueAgentStartClientSource,
+        },
+        {
+          find: /^vue-agent-start\/provider-hub$/,
+          replacement: vueAgentStartProviderSource,
+        },
+        {
+          find: /^vue-agent-start\/knowledge-hub$/,
+          replacement: vueAgentStartKnowledgeSource,
+        },
+        {
+          find: /^vue-agent-start\/agent-studio$/,
+          replacement: vueAgentStartStudioSource,
+        },
+        {
+          find: /^vue-agent-start\/agent-flow$/,
+          replacement: vueAgentStartAgentFlowSource,
+        },
+        // SFC styles are collected by Vite from source. Keep the package's
+        // explicit style import pointed at its source-level global tokens.
+        {
+          find: /^vue-agent-start\/style\.css$/,
+          replacement: vueAgentStartStyleSource,
+        },
         {
           find: /^@\/(.*)$/,
           replacement: `${vueAgentStartFlowSource}$1`,
@@ -28,6 +84,11 @@ export default defineConfig(async () => ({
         '@vue-flow/core',
       ],
     },
+    optimizeDeps: {
+      // Never cache the linked UI kit as a dependency: its source files must
+      // remain in Vite's transform graph so edits trigger HMR immediately.
+      exclude: ['vue-agent-start'],
+    },
     server: {
       // The local file dependency lives alongside this demonstration project.
       fs: {
@@ -36,7 +97,7 @@ export default defineConfig(async () => ({
       proxy: {
         '/api': {
           changeOrigin: true,
-          target: process.env.VITE_AGENT_API_TARGET ?? 'http://localhost:18091',
+          target: process.env.VITE_AGENT_API_TARGET ?? 'http://localhost:18090',
           rewrite: (path) => path.replace(/^\/api/, ''),
           ws: true,
         },
@@ -47,7 +108,7 @@ export default defineConfig(async () => ({
         },
         '/chatapi': {
           changeOrigin: true,
-          target: process.env.VITE_AGENT_API_TARGET ?? 'http://localhost:18091',
+          target: process.env.VITE_AGENT_API_TARGET ?? 'http://localhost:18090',
           rewrite: (path) => path.replace(/^\/chatapi/, ''),
           ws: true,
         },

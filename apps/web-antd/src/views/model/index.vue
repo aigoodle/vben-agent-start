@@ -16,8 +16,6 @@
  */
 import { onMounted, ref } from 'vue';
 
-import { Page } from '@vben/common-ui';
-
 import {
   ModelCardGrid,
   ProviderHubShell,
@@ -87,10 +85,7 @@ function onEditCredentials(m: ModelEntity) {
 </script>
 
 <template>
-  <Page
-    title="模型供应商"
-    description="填入 API Key 一次导入该供应商全部可用模型 —— 凭证 AES-GCM 加密存储。"
-  >
+  <div>
     <Spin :spinning="loading">
       <ProviderHubShell :models="models" @change="refresh" />
 
@@ -115,5 +110,5 @@ function onEditCredentials(m: ModelEntity) {
         </div>
       </div>
     </Spin>
-  </Page>
+  </div>
 </template>

@@ -730,8 +730,8 @@ importers:
         specifier: ^3.5.27
         version: 3.5.27(typescript@5.9.3)
       vue-agent-start:
-        specifier: file:../../../vue-agent-start
-        version: file:../vue-agent-start(@ant-design/icons-vue@7.0.1(vue@3.5.27(typescript@5.9.3)))(ant-design-vue@4.2.6(vue@3.5.27(typescript@5.9.3)))(pinia@3.0.4(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(sortablejs@1.15.6)(vue@3.5.27(typescript@5.9.3))
+        specifier: link:../../../vue-agent-start
+        version: link:../../../vue-agent-start
       vue-draggable-next:
         specifier: ^2.3.0
         version: 2.3.0(sortablejs@1.15.6)(vue@3.5.27(typescript@5.9.3))
@@ -10944,14 +10944,6 @@ packages:
 
   vscode-uri@3.1.0:
     resolution: {integrity: sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==}
-
-  vue-agent-start@file:../vue-agent-start:
-    resolution: {directory: ../vue-agent-start, type: directory}
-    peerDependencies:
-      '@ant-design/icons-vue': ^7.0.0
-      ant-design-vue: ^4.2.6
-      pinia: ^3.0.4
-      vue: ^3.5.27
 
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
@@ -21273,22 +21265,6 @@ snapshots:
   vscode-languageserver-textdocument@1.0.12: {}
 
   vscode-uri@3.1.0: {}
-
-  vue-agent-start@file:../vue-agent-start(@ant-design/icons-vue@7.0.1(vue@3.5.27(typescript@5.9.3)))(ant-design-vue@4.2.6(vue@3.5.27(typescript@5.9.3)))(pinia@3.0.4(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(sortablejs@1.15.6)(vue@3.5.27(typescript@5.9.3)):
-    dependencies:
-      '@ant-design/icons-vue': 7.0.1(vue@3.5.27(typescript@5.9.3))
-      '@vue-flow/background': 1.3.2(@vue-flow/core@1.48.2(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))
-      '@vue-flow/controls': 1.1.3(@vue-flow/core@1.48.2(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))
-      '@vue-flow/core': 1.48.2(vue@3.5.27(typescript@5.9.3))
-      '@vue-flow/minimap': 1.5.4(@vue-flow/core@1.48.2(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))
-      '@vue-flow/node-resizer': 1.5.1(@vue-flow/core@1.48.2(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))
-      ant-design-vue: 4.2.6(vue@3.5.27(typescript@5.9.3))
-      pinia: 3.0.4(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3))
-      vue: 3.5.27(typescript@5.9.3)
-      vue-draggable-next: 2.3.0(sortablejs@1.15.6)(vue@3.5.27(typescript@5.9.3))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - sortablejs
 
   vue-component-type-helpers@2.2.12: {}
 
