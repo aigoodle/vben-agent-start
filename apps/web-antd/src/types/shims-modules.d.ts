@@ -7,6 +7,13 @@
  * their real types. Runtime is unaffected — vite still bundles the real files.
  */
 declare module 'vue-agent-start' {
+  // ---- unified SDK / host integration ----
+  export const createAgentStartClient: any;
+  export const installAgentStartClient: any;
+  export const useAgentStartClient: any;
+  export type AgentStartClient = any;
+  export type AgentStartClientOptions = any;
+
   // ---- provider-hub ----
   export const CredentialForm: any;
   export const DefaultModelsPanel: any;
@@ -130,4 +137,13 @@ declare module 'vue-agent-start' {
   export const AgentFlowPlugin: any;
   export type BackendAdapter = any;
   export type AgentFlowInstallOptions = any;
+}
+
+declare module 'vue-agent-start/connector-hub' {
+  export const ConnectorHubApp: any;
+  export const useConnectorHub: any;
+  export type ConnectorDefinition = any;
+  export type ConnectorInstallation = any;
+  export type ConnectorConnection = any;
+  export type ConnectorExecutionRecord = any;
 }

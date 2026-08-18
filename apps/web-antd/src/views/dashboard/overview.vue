@@ -10,6 +10,7 @@ import { useRouter } from 'vue-router';
 import { Page } from '@vben/common-ui';
 
 import { Button, Card, Statistic, Tag } from 'ant-design-vue';
+import { useAgentStartClient } from 'vue-agent-start';
 
 import { listAgents } from '#/api/agent';
 import { listDatasets } from '#/api/knowledge';
@@ -20,6 +21,7 @@ import { listTools } from '#/api/tools';
 import { listTriggers } from '#/api/trigger';
 
 const router = useRouter();
+const agentStartClient = useAgentStartClient();
 
 const info = ref<SystemInfo | null>(null);
 const stats = ref({
@@ -27,6 +29,7 @@ const stats = ref({
   datasets: 0,
   agents: 0,
   tools: 0,
+  connectors: 0,
   triggers: 0,
 });
 const llmTotal = ref<LlmUsageStats | null>(null);
@@ -72,7 +75,7 @@ const costText = computed(() =>
     : '0.0000',
 );
 
-// 三步接入指引：模型 → 知识库 → 智能体。每一步都有 done 标记 + 直达按钮，
+// 四步接入指引：模型 → 知识库 → Connector → 智能体。
 // 新用户按顺序点下来就能跑通一个最小可用的 RAG-agent。
 const onboardingSteps = computed(() => [
   {
@@ -93,6 +96,14 @@ const onboardingSteps = computed(() => [
   },
   {
     n: 3,
+    title: '接入外部生态',
+    detail: '同步 Connector/OpenClaw 插件，配置邮件、IM、机器人等外部能力。',
+    done: stats.value.connectors > 0,
+    route: 'ConnectorHub',
+    doneText: `${stats.value.connectors} 个连接器可用`,
+  },
+  {
+    n: 4,
     title: '建一个智能体',
     detail: '选 LLM + 挂载知识库 / 工具，直接开聊。',
     done: stats.value.agents > 0,
@@ -110,6 +121,7 @@ const moduleCards = computed(() => [
   { title: '知识库', count: stats.value.datasets, route: 'KnowledgeList', icon: '📚' },
   { title: '智能体', count: stats.value.agents, route: 'AgentList', icon: '🤖' },
   { title: '工具', count: stats.value.tools, route: 'ToolsList', icon: '🔧' },
+  { title: '连接器', count: stats.value.connectors, route: 'ConnectorHub', icon: '🔌' },
   { title: '触发器', count: stats.value.triggers, route: 'TriggerList', icon: '⚡' },
   { title: 'LLM 调用', count: llmTotal.value?.calls ?? 0, route: 'LlmOps', icon: '📊' },
 ]);
@@ -120,11 +132,12 @@ onMounted(async () => {
   } catch {
     info.value = null;
   }
-  const [ms, ds, ags, ts, tgs, tot] = await Promise.all([
+  const [ms, ds, ags, ts, cs, tgs, tot] = await Promise.all([
     listModels().catch(() => []),
     listDatasets().catch(() => []),
     listAgents().catch(() => []),
     listTools().catch(() => []),
+    agentStartClient?.connectors.list().catch(() => []) ?? Promise.resolve([]),
     listTriggers().catch(() => []),
     fetchTotal().catch(() => null),
   ]);
@@ -133,6 +146,7 @@ onMounted(async () => {
     datasets: ds.length,
     agents: ags.length,
     tools: ts.length,
+    connectors: cs.length,
     triggers: tgs.length,
   };
   llmTotal.value = tot;

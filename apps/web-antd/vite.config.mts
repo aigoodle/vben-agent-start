@@ -26,6 +26,9 @@ const vueAgentStartStudioSource = fileURLToPath(
 const vueAgentStartAgentFlowSource = fileURLToPath(
   new URL('../../../vue-agent-start/src/agent-flow/index.ts', import.meta.url),
 );
+const vueAgentStartConnectorSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/connector-hub/index.ts', import.meta.url),
+);
 const vueAgentStartStyleSource = fileURLToPath(
   new URL(
     '../../../vue-agent-start/src/knowledge-hub/styles/index.css',
@@ -63,6 +66,10 @@ export default defineConfig(async () => ({
         {
           find: /^vue-agent-start\/agent-flow$/,
           replacement: vueAgentStartAgentFlowSource,
+        },
+        {
+          find: /^vue-agent-start\/connector-hub$/,
+          replacement: vueAgentStartConnectorSource,
         },
         // SFC styles are collected by Vite from source. Keep the package's
         // explicit style import pointed at its source-level global tokens.

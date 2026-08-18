@@ -213,7 +213,10 @@ const columns = [
         />
         <span class="text-xs text-gray-500 ml-auto">共 {{ templates.length }} 个</span>
       </div>
-      <Empty v-if="!loading && templates.length === 0" description="没有模板。点击"新建模板"从零开始。" />
+      <Empty
+        v-if="!loading && templates.length === 0"
+        description="没有模板。点击“新建模板”从零开始。"
+      />
       <Table
         v-else
         row-key="id"

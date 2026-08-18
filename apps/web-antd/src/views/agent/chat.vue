@@ -45,7 +45,7 @@ async function loadKnownConversations() {
     if (server.length > 0) {
       conversations.value = server.map((c) => ({
         id: c.conversationId,
-        preview: c.firstMessage,
+        preview: c.firstMessage ?? c.conversationId.slice(0, 8),
       }));
       return;
     }

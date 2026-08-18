@@ -47,6 +47,19 @@ async function bootstrap(namespace: string) {
   // 配置 pinia-tore
   await initStores(app, { namespace });
 
+  // vue-agent-start 全部业务组件共享同一个 HTTP 客户端。后续接入登录或
+  // 多租户时只需修改这里，模型、知识库、Agent、工作流和 Connector 都会
+  // 自动带上相同的认证及租户上下文。
+  const [{ useAccessStore }, { createAgentStartClient, installAgentStartClient }] =
+    await Promise.all([import('@vben/stores'), import('vue-agent-start')]);
+  const accessStore = useAccessStore();
+  const agentStartClient = createAgentStartClient({
+    baseUrl: import.meta.env.VITE_GLOB_API_URL || '/api',
+    getAccessToken: () => accessStore.accessToken ?? undefined,
+    getTenant: () => localStorage.getItem('spring-agent:tenant-id') || 'default',
+  });
+  app.use(installAgentStartClient, agentStartClient);
+
   // 安装权限指令
   registerAccessDirective(app);
 
