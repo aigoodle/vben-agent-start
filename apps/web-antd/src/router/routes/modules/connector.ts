@@ -19,6 +19,15 @@ const routes: RouteRecordRaw[] = [
           title: 'Connector 中心',
         },
       },
+      {
+        name: 'MyRobots',
+        path: '/connectors/my-robots',
+        component: () => import('#/views/connector/my-robots.vue'),
+        meta: {
+          icon: 'lucide:bot',
+          title: '我的机器人',
+        },
+      },
     ],
   },
 ];

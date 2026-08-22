@@ -141,9 +141,12 @@ declare module 'vue-agent-start' {
 
 declare module 'vue-agent-start/connector-hub' {
   export const ConnectorHubApp: any;
+  export const MyRobotsPanel: any;
+  export const RobotFormModal: any;
   export const useConnectorHub: any;
   export type ConnectorDefinition = any;
   export type ConnectorInstallation = any;
   export type ConnectorConnection = any;
   export type ConnectorExecutionRecord = any;
+  export type RobotUser = any;
 }

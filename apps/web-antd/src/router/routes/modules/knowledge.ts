@@ -30,15 +30,6 @@ const routes: RouteRecordRaw[] = [
           affixTab: false,
         },
       },
-      {
-        name: 'KnowledgeCrossSearch',
-        path: '/knowledge/cross-search',
-        component: () => import('#/views/knowledge/cross-search.vue'),
-        meta: {
-          icon: 'lucide:search',
-          title: '跨数据集检索',
-        },
-      },
     ],
   },
 ];
