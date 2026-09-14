@@ -24,7 +24,7 @@ onMounted(() => {
           { name: '定制', value: 310 },
           { name: '技术支持', value: 274 },
           { name: '远程', value: 400 },
-        ].toSorted((a, b) => {
+        ].sort((a, b) => {
           return a.value - b.value;
         }),
         name: '商业占比',
