@@ -9,6 +9,7 @@ const routes: RouteRecordRaw[] = [
     },
     name: 'Connector',
     path: '/connectors',
+    redirect: '/connectors/hub',
     children: [
       {
         name: 'ConnectorHub',
@@ -16,8 +17,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('#/views/connector/index.vue'),
         meta: {
           icon: 'lucide:blocks',
-          title: 'Connector 中心',
+          title: '消息连接器',
         },
+      },
+      {
+        name: 'ConnectorAccounts',
+        path: '/connectors/accounts',
+        component: () => import('#/views/connector/accounts.vue'),
+        meta: { icon: 'lucide:message-square-cog', title: '通道账号配置' },
       },
       {
         name: 'MyRobots',

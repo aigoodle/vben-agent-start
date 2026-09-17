@@ -11,6 +11,7 @@ declare module 'vue-agent-start' {
   export const createAgentStartClient: any;
   export const installAgentStartClient: any;
   export const useAgentStartClient: any;
+  export const useAgentStartClient: any;
   export type AgentStartClient = any;
   export type AgentStartClientOptions = any;
 
@@ -143,6 +144,7 @@ declare module 'vue-agent-start/connector-hub' {
   export const ConnectorHubApp: any;
   export const MyRobotsPanel: any;
   export const RobotFormModal: any;
+  export const ChannelConnectionPanel: any;
   export const useConnectorHub: any;
   export type ConnectorDefinition = any;
   export type ConnectorInstallation = any;

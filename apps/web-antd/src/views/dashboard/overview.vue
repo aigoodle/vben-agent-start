@@ -97,7 +97,7 @@ const onboardingSteps = computed(() => [
   {
     n: 3,
     title: '接入外部生态',
-    detail: '同步 Connector/OpenClaw 插件，配置邮件、IM、机器人等外部能力。',
+    detail: '配置原生消息 Connector，接入邮件、IM、机器人等外部能力。',
     done: stats.value.connectors > 0,
     route: 'ConnectorHub',
     doneText: `${stats.value.connectors} 个连接器可用`,

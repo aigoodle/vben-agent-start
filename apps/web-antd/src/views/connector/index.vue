@@ -32,8 +32,8 @@ function saveTenant() {
 
 <template>
   <Page
-    title="Connector 中心"
-    description="统一使用自有 Connector 与 OpenClaw 插件生态，并通过 HTTP 暴露给 Agent 和工作流。"
+    title="消息连接器"
+    description="统一管理 QQBot、飞书、钉钉、企业微信、Email 与 Webhook；账号归员工，应用工作流独立订阅通道。"
   >
     <template #extra>
       <div class="flex items-center gap-2">

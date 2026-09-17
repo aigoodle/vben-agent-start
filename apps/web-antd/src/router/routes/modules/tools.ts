@@ -19,6 +19,24 @@ const routes: RouteRecordRaw[] = [
           title: '工具列表',
         },
       },
+      {
+        name: 'PluginManager',
+        path: '/tools/plugins',
+        component: () => import('#/views/tools/plugins.vue'),
+        meta: {
+          icon: 'lucide:blocks',
+          title: '插件管理',
+        },
+      },
+      {
+        name: 'McpServers',
+        path: '/tools/mcp',
+        component: () => import('#/views/tools/mcp.vue'),
+        meta: {
+          icon: 'lucide:server-cog',
+          title: 'MCP 配置',
+        },
+      },
     ],
   },
 ];

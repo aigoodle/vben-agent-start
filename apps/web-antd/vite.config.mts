@@ -29,6 +29,12 @@ const vueAgentStartAgentFlowSource = fileURLToPath(
 const vueAgentStartConnectorSource = fileURLToPath(
   new URL('../../../vue-agent-start/src/connector-hub/index.ts', import.meta.url),
 );
+const vueAgentStartPluginSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/plugin-hub/index.ts', import.meta.url),
+);
+const vueAgentStartMcpSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/mcp-hub/index.ts', import.meta.url),
+);
 const vueAgentStartStyleSource = fileURLToPath(
   new URL(
     '../../../vue-agent-start/src/knowledge-hub/styles/index.css',
@@ -70,6 +76,14 @@ export default defineConfig(async () => ({
         {
           find: /^vue-agent-start\/connector-hub$/,
           replacement: vueAgentStartConnectorSource,
+        },
+        {
+          find: /^vue-agent-start\/plugin-hub$/,
+          replacement: vueAgentStartPluginSource,
+        },
+        {
+          find: /^vue-agent-start\/mcp-hub$/,
+          replacement: vueAgentStartMcpSource,
         },
         // SFC styles are collected by Vite from source. Keep the package's
         // explicit style import pointed at its source-level global tokens.
