@@ -29,17 +29,26 @@ const vueAgentStartAgentFlowSource = fileURLToPath(
 const vueAgentStartConnectorSource = fileURLToPath(
   new URL('../../../vue-agent-start/src/connector-hub/index.ts', import.meta.url),
 );
+const vueAgentStartChannelSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/channel-hub/index.ts', import.meta.url),
+);
 const vueAgentStartPluginSource = fileURLToPath(
   new URL('../../../vue-agent-start/src/plugin-hub/index.ts', import.meta.url),
 );
 const vueAgentStartMcpSource = fileURLToPath(
   new URL('../../../vue-agent-start/src/mcp-hub/index.ts', import.meta.url),
 );
+const vueAgentStartToolSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/tool-hub/index.ts', import.meta.url),
+);
+const vueAgentStartSkillSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/skill-hub/index.ts', import.meta.url),
+);
+const vueAgentStartTriggerSource = fileURLToPath(
+  new URL('../../../vue-agent-start/src/trigger-hub/index.ts', import.meta.url),
+);
 const vueAgentStartStyleSource = fileURLToPath(
-  new URL(
-    '../../../vue-agent-start/src/knowledge-hub/styles/index.css',
-    import.meta.url,
-  ),
+  new URL('../../../vue-agent-start/src/style.css', import.meta.url),
 );
 
 export default defineConfig(async () => ({
@@ -78,12 +87,28 @@ export default defineConfig(async () => ({
           replacement: vueAgentStartConnectorSource,
         },
         {
+          find: /^vue-agent-start\/channel-hub$/,
+          replacement: vueAgentStartChannelSource,
+        },
+        {
           find: /^vue-agent-start\/plugin-hub$/,
           replacement: vueAgentStartPluginSource,
         },
         {
           find: /^vue-agent-start\/mcp-hub$/,
           replacement: vueAgentStartMcpSource,
+        },
+        {
+          find: /^vue-agent-start\/tool-hub$/,
+          replacement: vueAgentStartToolSource,
+        },
+        {
+          find: /^vue-agent-start\/skill-hub$/,
+          replacement: vueAgentStartSkillSource,
+        },
+        {
+          find: /^vue-agent-start\/trigger-hub$/,
+          replacement: vueAgentStartTriggerSource,
         },
         // SFC styles are collected by Vite from source. Keep the package's
         // explicit style import pointed at its source-level global tokens.
@@ -111,6 +136,13 @@ export default defineConfig(async () => ({
       exclude: ['vue-agent-start'],
     },
     server: {
+      // This workspace also watches the linked vue-agent-start sources. Use
+      // polling so development remains reliable on Linux machines with a low
+      // inotify watcher limit (otherwise Vite exits with ENOSPC).
+      watch: {
+        interval: 300,
+        usePolling: true,
+      },
       // The local file dependency lives alongside this demonstration project.
       fs: {
         allow: [fileURLToPath(new URL('../../../../', import.meta.url))],

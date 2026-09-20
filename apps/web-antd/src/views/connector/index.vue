@@ -33,7 +33,7 @@ function saveTenant() {
 <template>
   <Page
     title="消息连接器"
-    description="统一管理 QQBot、飞书、钉钉、企业微信、Email 与 Webhook；账号归员工，应用工作流独立订阅通道。"
+    description="管理供 Agent 与工作流调用的业务连接器、授权凭据和执行能力；QQBot、微信等账户请前往消息渠道。"
   >
     <template #extra>
       <div class="flex items-center gap-2">

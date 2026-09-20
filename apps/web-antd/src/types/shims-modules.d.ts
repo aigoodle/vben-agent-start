@@ -152,3 +152,13 @@ declare module 'vue-agent-start/connector-hub' {
   export type ConnectorExecutionRecord = any;
   export type RobotUser = any;
 }
+
+declare module 'vue-agent-start/channel-hub' {
+  export const ChannelHubApp: any;
+  export const ChannelConnectionPanel: any;
+  export const MyRobotsPanel: any;
+  export const RobotFormModal: any;
+  export type ChannelDefinition = any;
+  export type ChannelConnection = any;
+  export type RobotUser = any;
+}

@@ -37,6 +37,15 @@ const routes: RouteRecordRaw[] = [
           title: 'MCP 配置',
         },
       },
+      {
+        name: 'SkillManager',
+        path: '/tools/skills',
+        component: () => import('#/views/tools/skills.vue'),
+        meta: {
+          icon: 'lucide:book-open-check',
+          title: 'Skill 管理',
+        },
+      },
     ],
   },
 ];

@@ -11,8 +11,10 @@ import {
 } from '#/api/model';
 import {
   listWorkflows,
+  publishWorkflowDraft,
   runGraph,
   saveWorkflow as apiSaveWorkflow,
+  saveWorkflowDraft,
 } from '#/api/workflow';
 
 /**
@@ -117,12 +119,15 @@ export const springAgentBackend: BackendAdapter = {
 
   async publishWorkflow(payload: any) {
     const appId = requireAppId(payload, 'publishWorkflow');
-    const res = await apiSaveWorkflow({
+    // Publishing is a two-step app-scoped operation: persist the latest canvas
+    // into the mutable draft, then snapshot it. The publish endpoint also
+    // reconciles START-node schedules/message listeners into Trigger Center.
+    await saveWorkflowDraft(appId, toBackendGraph(payload.graph));
+    const res = await publishWorkflowDraft(
       appId,
-      name: payload.name ?? `wf-${Date.now()}`,
-      mode: 'workflow',
-      graph: toBackendGraph(payload.graph),
-    });
+      payload.markedName,
+      payload.markedComment,
+    );
     return { data: { code: 0, message: '已保存并发布', workflow: res } };
   },
 

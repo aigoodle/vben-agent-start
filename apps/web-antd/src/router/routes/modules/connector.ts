@@ -5,7 +5,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       icon: 'lucide:plug-zap',
       order: 45,
-      title: '连接器生态',
+      title: '业务连接器',
     },
     name: 'Connector',
     path: '/connectors',
@@ -17,22 +17,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('#/views/connector/index.vue'),
         meta: {
           icon: 'lucide:blocks',
-          title: '消息连接器',
-        },
-      },
-      {
-        name: 'ConnectorAccounts',
-        path: '/connectors/accounts',
-        component: () => import('#/views/connector/accounts.vue'),
-        meta: { icon: 'lucide:message-square-cog', title: '通道账号配置' },
-      },
-      {
-        name: 'MyRobots',
-        path: '/connectors/my-robots',
-        component: () => import('#/views/connector/my-robots.vue'),
-        meta: {
-          icon: 'lucide:bot',
-          title: '我的机器人',
+          title: '连接器管理',
         },
       },
     ],
